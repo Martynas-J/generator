@@ -1,6 +1,5 @@
 "use client";
 import CopyButton from "@/component/buttonCopy/buttonCopy";
-import Link from "next/link";
 import React, { useRef, useState } from "react";
 
 function TextProcessor() {
@@ -76,7 +75,7 @@ function TextProcessor() {
         Įklijuoti
       </button>
       <div ref={contentRef}>
-        <div>
+        <div >
           {extractedData.id !== null && (
             <div className="mt-4">
               <div className="pb-5">
@@ -91,11 +90,8 @@ function TextProcessor() {
                 prisijungimo duomenis (ID ir slaptažodi);{" "}
               </div>
               <div className="pb-5">
-                2. Paspausti nuoroda{" "}
-                <Link href={extractedData.inviteLink} className="text-blue-500 underline">
-                  {extractedData.inviteLink}
-                </Link>{" "}
-                ir suvesti prisijungimo slaptažodi, kuris yra nurodytas žemiau.
+                2. Paspausti nuoroda {extractedData.inviteLink} ir suvesti
+                prisijungimo slaptažodi, kuris yra nurodytas žemiau.
               </div>
               <div className="pb-5">Posedžio prisijungimo duomenys:</div>
               <div>Prisijungimo nuoroda - https://zoom.us/</div>
