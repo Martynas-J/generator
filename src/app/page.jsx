@@ -12,6 +12,7 @@ function TextProcessor() {
     passcode: null,
   });
   const contentRef = useRef(null);
+  const theme = useRef(null);
 
   const extractData = () => {
     const idRegex = /Meeting ID\s*\n*(\d{3}\s\d{4}\s\d{4})/;
@@ -74,37 +75,57 @@ function TextProcessor() {
       >
         Įklijuoti
       </button>
-      <div ref={contentRef}>
-        <div >
-          {extractedData.id !== null && (
-            <div className="mt-4">
-              <div className="pb-5">
-                Nutolusi šalis prie teismo posedžio gali prisijungti šiais
-                budais:
+      <div className="border p-2 mt-3">
+        <div ref={theme}>
+          <div>
+            {extractedData.topic !== null && (
+              <div className="mt-4">
+                <div> {extractedData.topic} zoom</div>
               </div>
-              <div>
-                1. Parsisiunciant ZOOM programa iš zoom.us arba Android
-                irenginiams iš Google Play, o Apple irenginiams – iš APPSTORE
-                arba jungiantis adresu https://zoom.us/join . Pasirinkus viena
-                iš minetu prisijungimo variantu reikes ivesti žemiau nurodytus
-                prisijungimo duomenis (ID ir slaptažodi);{" "}
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center py-2">
+        {extractedData.id !== null && (
+          <CopyButton textToCopy={theme?.current} />
+        )}
+      </div>
+      <div className="border p-2">
+        <div ref={contentRef}>
+          <div>
+            {extractedData.id !== null && (
+              <div className="mt-4">
+                <div className="pb-5">
+                  Nutolusi šalis prie teismo posedžio gali prisijungti šiais
+                  budais:
+                </div>
+                <div>
+                  1. Parsisiunciant ZOOM programa iš zoom.us arba Android
+                  irenginiams iš Google Play, o Apple irenginiams – iš APPSTORE
+                  arba jungiantis adresu https://zoom.us/join . Pasirinkus viena
+                  iš minetu prisijungimo variantu reikes ivesti žemiau nurodytus
+                  prisijungimo duomenis (ID ir slaptažodi);{" "}
+                </div>
+                <div className="pb-5">
+                  2. Paspausti nuoroda {extractedData.inviteLink} ir suvesti
+                  prisijungimo slaptažodi, kuris yra nurodytas žemiau.
+                </div>
+                <div className="pb-5">Posedžio prisijungimo duomenys:</div>
+                <div>Prisijungimo nuoroda - https://zoom.us/</div>
+                <div>
+                  Prisijungimo ID –{" "}
+                  <span className="font-semibold">{extractedData.id}</span>
+                </div>
+                <div>
+                  Slaptažodis -{" "}
+                  <span className="font-semibold">
+                    {extractedData.security}
+                  </span>
+                </div>
               </div>
-              <div className="pb-5">
-                2. Paspausti nuoroda {extractedData.inviteLink} ir suvesti
-                prisijungimo slaptažodi, kuris yra nurodytas žemiau.
-              </div>
-              <div className="pb-5">Posedžio prisijungimo duomenys:</div>
-              <div>Prisijungimo nuoroda - https://zoom.us/</div>
-              <div>
-                Prisijungimo ID –{" "}
-                <span className="font-semibold">{extractedData.id}</span>
-              </div>
-              <div>
-                Slaptažodis -{" "}
-                <span className="font-semibold">{extractedData.security}</span>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center py-2">
